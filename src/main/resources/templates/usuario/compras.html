@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:insert="fragments :: headerfiles">
+</head>
+<body>
+	<header th:insert="fragments :: nav" th:if="${sesion==null}"></header>
+	
+	<div th:include="usuario/template_usuario.html::header-user" th:unless="${sesion==null}"> </div>
+
+	<div class="container">
+		<!-- Page Heading/Breadcrumbs -->
+		<h1 class="mt-4 mb-3">
+			DecorCasa<small> Resumen de compras</small>
+		</h1>
+
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+        <li class="breadcrumb-item active">Compras</li>
+      </ol>
+
+      <!-- Blog Post -->
+      <div class="card mb-4">
+        <div class="card-body">
+          <div class="row">
+           <div class="col-lg-12">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">No. de Orden</th>
+                  <th scope="col">Fecha</th>
+                  <th scope="col">Valor</th>
+                  <th scope="col">Acción</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="factura: ${facturas}">
+                  <td th:text="${factura.numero}"></td>
+                  <td th:text="${factura.fechaCreacion}" ></td>
+                  <td th:text="${factura.total}" ></td>
+                  <td><a th:href="@{/usuario/detalle/{id} (id=${factura.id}) }" class="btn btn-success">Ver Detalle</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <div th:include="usuario/template_usuario.html::footer"></div>
+
+	<div th:insert="fragments :: scripts"></div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:insert="fragments :: headerfiles">
+<body>
+	<header th:insert="fragments :: nav"></header>
+
+	<div class="container">
+
+
+		<!-- Page Heading/Breadcrumbs -->
+		<h1 class="mt-4 mb-3">
+			Sección para administrar <small>Cliente</small>
+		</h1>
+
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+			<li class="breadcrumb-item active">Ver Clientes</li>
+		</ol>
+
+		<h2>Cliente</h2>
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">Foto</th>
+					<th scope="col">Nombre</th>
+					<th scope="col">Apellidos</th>
+					<th scope="col">Email</th>
+					<th scope="col">Dirección</th>
+					<th scope="col">Teléfono</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="cliente: ${cliente}">
+					<td><img class="img-thumbnail rounded float-left" style="max-width: 10%;"
+						th:src="@{/uploads/{file} (file=${cliente.foto})}" th:alt="${cliente.foto}" /> </td>
+					<td th:text="${cliente.nombre}"></td>
+					<td th:text="${cliente.apellido}"></td>
+					<td th:text="${cliente.email}"></td>
+					<td th:text="${cliente.direccion}"></td>
+					<td th:text="${cliente.telefono}"></td>
+					<td><a class="btn btn-warning"
+						th:href="@{/admin/editar/}  + ${cliente.id}">Editar</a></td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+
+	<footer th:insert="fragments :: footer"></footer>
+	<div th:insert="fragments :: scripts"></div>
+</body>
+</html>

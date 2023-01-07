@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="headerfiles">
+<title>DecorCasa.com</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="icon" type="img/png" th:href="@{/images/tienda.jpg}">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+	crossorigin="anonymous">
+</head>
+
+<body>
+
+	<!-- Navigation -->
+	<div th:fragment="header">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+			<div class="container">
+				<a class="navbar-brand" th:href="@{/}">DecorCasa</a>
+
+				<div class="collapse navbar-collapse" id="navbarResponsive">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item"><a class="nav-link"
+							th:href="@{/usuario/login}" sec:authorize="!isAuthenticated()"><button
+									class="btn btn-outline-success my-2 my-sm-0" type="submit">
+									 Iniciar Sesión
+								</button></a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+	</div>
+
+
+	<!-- Navigation -->
+	<div th:fragment="header-user">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+			<div class="container">
+				<a class="navbar-brand" th:href="@{/}">DecorCasa</a>
+
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarResponsive" aria-controls="navbarResponsive"
+					aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarResponsive">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#"
+							id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false"> USER </a>
+
+							<div class="dropdown-menu"
+								aria-labelledby="navbarDropdownMenuLink">
+								<a class="dropdown-item" th:href="@{/usuario/compras}">Compras</a>
+								<a class="dropdown-item" th:href="@{/getCart}"> Carrito</a>
+							</div></li>
+						<li class="nav-item dropdown active"
+							sec:authorize="hasRole('ROLE_ADMIN')"><a
+							class="nav-link dropdown-toggle" href="#"
+							id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false"> ADMIN </a>
+
+							<div class="dropdown-menu"
+								aria-labelledby="navbarDropdownMenuLink">
+								<a class="dropdown-item" th:href="@{/producto}"> Ver lista
+									de Producto</a> <a class="dropdown-item"
+									th:href="@{/admin/cliente}">Ver lista de Cliente</a> <a
+									class="dropdown-item" th:href="@{/admin/factura}"> Ver lista
+									de factura</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" th:href="@{/producto/nuevo}"> Nuevo Producto
+								</a>
+							</div></li>
+					</ul>
+				</div>
+				<form sec:authorize="isAuthenticated()"
+					class="form-inline my-2 my-lg-0" th:action="@{/cerrar}"
+					method="post">
+					<button class="btn btn-outline-danger my-2 my-sm-0" type="submit">
+						 Cerrar Sesión
+					</button>
+				</form>
+
+			</div>
+		</nav>
+
+	</div>
+
+
+	<!-- Footer -->
+	<div th:fragment="footer">
+		<footer
+			class="footer mt-auto py-3 text-center dark bg-dark fixed-bottom">
+			<div class="container">
+				<span class="text-muted">&copy; Alejandro Rodríguez Bravo</span>
+			</div>
+			<!-- /.container -->
+		</footer>
+
+	</div>
+	<div th:fragment="scripts">
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+			integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+			crossorigin="anonymous"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+			integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+			crossorigin="anonymous"></script>
+		<script
+			src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+			integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+			crossorigin="anonymous"></script>
+	</div>
+
+</body>
+
+</html>

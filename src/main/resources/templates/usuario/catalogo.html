@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:insert="fragments :: headerfiles">
+<body>
+
+	<div id="i18n_eliminar_cliente" th:text="#{text.cliente.eliminarOk}"
+		style="display: none;"></div>
+
+	<header th:insert="fragments :: nav"></header>
+
+	<div class="container py-4">
+
+		<div class="row text-center">
+
+			<div class="col-lg-3 col-md-6 mb-4" th:each="producto: ${productos}">
+				<div class="card h-100">
+					<p class="card-text" th:text="${producto.nombre}"></p>
+					<hr>
+					<div class="card-body">
+						<img class="card-img-top"
+							th:src="@{'/uploads/' + ${producto.foto}}"
+							th:alt="${producto.foto}">
+					</div>
+					<div class="card-footer">
+						<small><a
+							th:href="@{'/producto/detalle/' + ${producto.id}}"><button
+									class="btn btn-outline-primary">
+									<i class="far fa-eye"></i> ver Detalle
+								</button></a></small>
+						<hr>
+						<small><a sec:authorize="hasRole('ROLE_ADMIN')"
+							th:href="@{'/producto/editar/' + ${producto.id}}"><button
+									class="btn btn-outline-warning">
+									<i class="far fa-edit"></i>
+								</button></a></small> <small><a sec:authorize="hasRole('ROLE_ADMIN')"
+							th:href="@{'/producto/borrar/' + ${producto.id}}"><button
+									class="btn btn-outline-danger">
+									<i class="far fa-trash-alt"></i>
+								</button></a></small>
+					</div>
+				</div>
+			</div>
+		</div>
+		<nav th:replace="paginator-nav :: paginator"></nav>
+		<hr>
+		<hr>
+	</div>
+
+	<footer th:insert="fragments :: footer"></footer>
+	<div th:insert="fragments :: scripts"></div>
+</body>
+</html>
