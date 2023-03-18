@@ -1,17 +1,10 @@
 package com.arodriguezbravo.catalago.config;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.arodriguezbravo.catalago.enums.RolNombre;
-import com.arodriguezbravo.catalago.model.entity.Cliente;
-import com.arodriguezbravo.catalago.model.entity.Rol;
 import com.arodriguezbravo.catalago.service.IClienteService;
 import com.arodriguezbravo.catalago.service.IRolService;
 
@@ -38,7 +31,7 @@ public class CreateAdmin implements CommandLineRunner {
 
 		
 		
-		
+		/*
 		  Cliente usuario = new Cliente(); String passwordEncoded =
 		  passwordEncoder.encode("admin"); usuario.setNombreUsuario("admin");
 		  usuario.setPassword(passwordEncoded); usuario.setNombre("Alejandro");
@@ -59,7 +52,7 @@ public class CreateAdmin implements CommandLineRunner {
 		  usuario2.setEmail("pruebaAlejandro@hotmail.com"); usuario2.setCreateAt(new
 		  Date()); Rol rolUser = rolService.getByRolNombre(RolNombre.ROLE_USER).get();
 		  Set<Rol> rolesU = new HashSet<>(); rolesU.add(rolUser);
-		  usuario2.setRoles(rolesU); usuarioService.save(usuario2);
+		  usuario2.setRoles(rolesU); usuarioService.save(usuario2);*/
 		 
 		 
 

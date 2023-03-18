@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
 
-import com.arodriguezbravo.catalago.enums.RolNombre;
-import com.arodriguezbravo.catalago.model.entity.Rol;
 import com.arodriguezbravo.catalago.service.IRolService;
 
 /**
@@ -24,12 +22,12 @@ public class CreateRoles implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		
+		/*
 		  Rol rolAdmin = new Rol(1L,RolNombre.ROLE_ADMIN); 
 		  Rol rolUser = new Rol(2L,RolNombre.ROLE_USER); 
 		  rolService.save(rolAdmin);
 		  rolService.save(rolUser);
-		 
+		 */
 
 	}
 }
