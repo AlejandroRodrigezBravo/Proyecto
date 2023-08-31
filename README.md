@@ -25,8 +25,6 @@ Este proyecto es una aplicación web basada en una arquitectura moderna y escala
 3. Ejecuta la aplicación Spring Boot.
 4. INICIO: **http://localhost:8080/**
 
-cd tu-repositorio
-
 
 Licencia
 Este proyecto está bajo la Licencia Licencia GPL. Ver el archivo LICENSE para más detalles.
