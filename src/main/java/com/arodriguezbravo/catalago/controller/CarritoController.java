@@ -1,11 +1,14 @@
 
 package com.arodriguezbravo.catalago.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -27,6 +30,7 @@ import com.arodriguezbravo.catalago.service.IClienteService;
 import com.arodriguezbravo.catalago.service.IFacturaItemsService;
 import com.arodriguezbravo.catalago.service.IFacturaService;
 import com.arodriguezbravo.catalago.service.IProductoService;
+import com.lowagie.text.DocumentException;
 
 /**
  * Endpoint de carro de compras
@@ -169,30 +173,35 @@ public class CarritoController {
 	}
 
 	// guardar la orden
-	@GetMapping("/saveOrder")
-	public String saveOrder(HttpSession session) {
-		Date fechaCreacion = new Date();
-		factura.setFechaCreacion(fechaCreacion);
-		factura.setNumero(facturaService.generarNumero());
+		@GetMapping("/saveOrder")
+		public String saveOrder(HttpServletResponse response, HttpSession session) throws MessagingException, DocumentException, IOException {
+			Date fechaCreacion = new Date();
+			factura.setFechaCreacion(fechaCreacion);
+			factura.setNumero(facturaService.generarNumero());
 
-		// usuario
-		Cliente usuario = clienteService.findOne((long) Integer.parseInt(session.getAttribute("idusuario").toString())).get();
+			// usuario
+			Cliente usuario = clienteService.findOne((long) Integer.parseInt(session.getAttribute("idusuario").toString())).get();
 
-		factura.setCliente(usuario);
-		facturaService.save(factura);
+			factura.setCliente(usuario);
+			facturaService.save(factura);
 
-		// guardar detalles
-		for (ItemFactura dt : itemsLista) {
-			dt.setFactura(factura);
-			itemsFacturaService.save(dt);
+			// guardar detalles
+			for (ItemFactura dt : itemsLista) {
+				dt.setFactura(factura);
+				itemsFacturaService.save(dt);
+			}
+
+			/// limpiar lista y orden
+			factura = new Factura();
+			itemsLista.clear();
+			
+			response.setContentType("application/pdf");
+	        response.setHeader("Content-Disposition", "inline; filename=factura.pdf");
+			
+			facturaService.enviarFacturaPorCorreo(response,usuario.getEmail());
+			
+			return "redirect:/";
 		}
-
-		/// limpiar lista y orden
-		factura = new Factura();
-		itemsLista.clear();
-
-		return "redirect:/";
-	}
 	
 
 

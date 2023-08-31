@@ -1,10 +1,15 @@
 package com.arodriguezbravo.catalago.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletResponse;
+
 import com.arodriguezbravo.catalago.model.entity.Cliente;
 import com.arodriguezbravo.catalago.model.entity.Factura;
+import com.lowagie.text.DocumentException;
 
 /**
  * Funcionalidad de Factura
@@ -45,4 +50,7 @@ public interface IFacturaService {
 	 * @return devuelve elemento encontrado, null en caso contrario
 	 */
 	List<Factura> findByCliente(Cliente cliente);
+	
+	void enviarFacturaPorCorreo(HttpServletResponse response, String destinatario)
+			throws MessagingException, DocumentException, IOException;
 }

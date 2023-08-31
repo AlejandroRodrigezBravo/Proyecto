@@ -15,7 +15,8 @@
 	<name>arodriguezbravo-catalogo</name>
 	<description>Proyecto de una web para compartir catalogo online</description>
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>17</java.version>
+		<start-class>com.arodriguezbravo.catalago.ArodriguezbravoCatalogoApplication</start-class>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -103,15 +104,38 @@
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<dependency>
+	        <groupId>javax.mail</groupId>
+	        <artifactId>javax.mail-api</artifactId>
+    	</dependency>
+    	<dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-mail</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.pdfbox</groupId>
+        <artifactId>pdfbox</artifactId>
+        <version>2.0.28</version>
+    </dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>3.1.0</version>
-			</plugin>
+		        <groupId>org.springframework.boot</groupId>
+		        <artifactId>spring-boot-maven-plugin</artifactId>
+		        <configuration>
+		            <mainClass>com.arodriguezbravo.catalago.ArodriguezbravoCatalogoApplication</mainClass>
+		            <layout>JAR</layout>
+		        </configuration>
+		        <executions>
+				    <execution>
+				        <goals>
+				            <goal>repackage</goal>
+				        </goals>
+				    </execution>
+				</executions>
+		    </plugin>
 		</plugins>
 	</build>
 
